@@ -60,20 +60,22 @@ clearInputs.addEventListener("click", () => {
 function operate (num1, num2, operator) {
     num1=parseInt(num1);
     num2=parseInt(num2);
+    let operateOutput;
     switch (operator) {
         case "add":
-            return add(num1,num2);
+            operateOutput = add(num1,num2);
             break;
         case "subtract":
-            return subtract(num1, num2);
+            operateOutput = subtract(num1, num2);
             break;
         case "multiply":
-            return multiply(num1, num2);
+            operateOutput = multiply(num1, num2);
             break;
         case "divide":
-            return divide(num1, num2);
+            operateOutput = divide(num1, num2);
             break;
     }
+    return operateOutput;
 };
 
 const executeOperation = document.querySelector(".equals");

@@ -1,5 +1,5 @@
-let firstNumber;
-let secondNumber;
+let firstNumber=0;
+let secondNumber=0;
 let operator;
 
 // basic number operator functions
@@ -25,13 +25,15 @@ const outputDisplay = document.querySelector(".output");
 const selectedNumber = document.querySelectorAll(".number");
 selectedNumber.forEach((item) => {
     item.addEventListener("click", (e) => {
-        const selectedNumber = parseInt(e.target.id);
+        const selectedNumber = e.target.id;
         if (operator === undefined) {
-            firstNumber = selectedNumber
+            firstNumber += selectedNumber.toString();
+            numberAsString = parseInt(firstNumber);
         } else {
-            secondNumber = selectedNumber
+            secondNumber += selectedNumber.toString();
+            numberAsString = parseInt(secondNumber);
         };
-        outputDisplay.textContent=selectedNumber;
+        outputDisplay.textContent=numberAsString;
     })
     }
 ); 
@@ -47,8 +49,8 @@ selectedOperator.forEach((item) => {
 const clearInputs = document.querySelector(".clear");
 clearInputs.addEventListener("click", () => {
     outputDisplay.textContent=0;
-    firstNumber=undefined;
-    secondNumber=undefined;
+    firstNumber=0;
+    secondNumber=0;
     operator=undefined;
 });
 
@@ -71,7 +73,7 @@ function operate (num1, num2, operator) {
 
 const executeOperation = document.querySelector(".equals");
 executeOperation.addEventListener("click", () => {
-    outputDisplay.textContent=operate(firstNumber, secondNumber, operator);
+    outputDisplay.textContent=operate(parseInt(firstNumber), parseInt(secondNumber), operator);
     firstNumber=undefined;
     secondNumber=undefined;
     operator=undefined;

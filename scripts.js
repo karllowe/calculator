@@ -44,6 +44,14 @@ selectedOperator.forEach((item) => {
     })}
 );
 
+const clearInputs = document.querySelector(".clear");
+clearInputs.addEventListener("click", () => {
+    outputDisplay.textContent=0;
+    firstNumber=undefined;
+    secondNumber=undefined;
+    operator=undefined;
+});
+
 function operate (num1, num2, operator) {
     switch (operator) {
         case "add":
@@ -63,5 +71,8 @@ function operate (num1, num2, operator) {
 
 const executeOperation = document.querySelector(".equals");
 executeOperation.addEventListener("click", () => {
-    outputDisplay.textContent=operate(firstNumber, secondNumber, operator)
+    outputDisplay.textContent=operate(firstNumber, secondNumber, operator);
+    firstNumber=undefined;
+    secondNumber=undefined;
+    operator=undefined;
 })

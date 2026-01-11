@@ -1,6 +1,7 @@
 let firstNumber=0;
 let secondNumber=0;
 let operator;
+let maxDigits=8;
 
 // basic number operator functions
 function add (num1, num2) {
@@ -41,8 +42,10 @@ selectedNumber.forEach((item) => {
 const selectedOperator = document.querySelectorAll(".operator");
 selectedOperator.forEach((item) => {
     item.addEventListener("click", (e) => {
-        operator=e.target.id;
-        outputDisplay.textContent=e.target.textContent;
+        if (operator === undefined) {
+            operator=e.target.id;
+            outputDisplay.textContent=e.target.textContent;
+        }
     })}
 );
 
@@ -55,6 +58,8 @@ clearInputs.addEventListener("click", () => {
 });
 
 function operate (num1, num2, operator) {
+    num1=parseInt(num1);
+    num2=parseInt(num2);
     switch (operator) {
         case "add":
             return add(num1,num2);
@@ -73,8 +78,14 @@ function operate (num1, num2, operator) {
 
 const executeOperation = document.querySelector(".equals");
 executeOperation.addEventListener("click", () => {
-    outputDisplay.textContent=operate(parseInt(firstNumber), parseInt(secondNumber), operator);
-    firstNumber=undefined;
-    secondNumber=undefined;
-    operator=undefined;
+    if (operator != undefined) {
+        if (operator == "divide" && secondNumber == 0) {
+            outputDisplay.textContent = "impossible!";
+        } else {
+            outputDisplay.textContent=operate(firstNumber, secondNumber, operator);
+        };
+        firstNumber=0;
+        secondNumber=0;
+        operator=undefined;
+    }
 })

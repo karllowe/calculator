@@ -20,19 +20,29 @@ function divide (num1, num2) {
 };
 
 // basic variables and operate function
+const outputDisplay = document.querySelector(".output");
+
 const selectedNumber = document.querySelectorAll(".number");
 selectedNumber.forEach((item) => {
     item.addEventListener("click", (e) => {
+        const selectedNumber = parseInt(e.target.id);
         if (operator === undefined) {
-            firstNumber = parseInt(e.target.id)
+            firstNumber = selectedNumber
         } else {
-            secondNumber = parseInt(e.pointerId)
+            secondNumber = selectedNumber
         };
-        console.log(firstNumber);
+        outputDisplay.textContent=selectedNumber;
     })
     }
 ); 
 
+const selectedOperator = document.querySelectorAll(".operator");
+selectedOperator.forEach((item) => {
+    item.addEventListener("click", (e) => {
+        operator=e.target.id;
+        outputDisplay.textContent=e.target.textContent;
+    })}
+);
 
 function operate (num1, num2, operator) {
     switch (operator) {
@@ -50,3 +60,8 @@ function operate (num1, num2, operator) {
             break;
     }
 };
+
+const executeOperation = document.querySelector(".equals");
+executeOperation.addEventListener("click", () => {
+    outputDisplay.textContent=operate(firstNumber, secondNumber, operator)
+})

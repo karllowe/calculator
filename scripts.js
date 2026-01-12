@@ -29,15 +29,38 @@ selectedNumber.forEach((item) => {
         const selectedNumber = e.target.id;
         if (operator === undefined) {
             firstNumber += selectedNumber.toString();
-            numberAsString = parseInt(firstNumber);
+            numberAsString = parseFloat(firstNumber);
         } else {
             secondNumber += selectedNumber.toString();
-            numberAsString = parseInt(secondNumber);
+            numberAsString = parseFloat(secondNumber);
         };
         outputDisplay.textContent=numberAsString;
     })
     }
 ); 
+
+const decimalSelected = document.querySelector("#decimal");
+decimalSelected.addEventListener("click", () => {
+        if (operator === undefined) {
+            firstNumber += ".";
+            numberAsString = parseFloat(firstNumber).toString();
+        } else {
+            secondNumber += ".";
+            numberAsString = parseFloat(secondNumber).toString();
+        };
+        outputDisplay.textContent=numberAsString;
+});
+
+const anyButtonClicked = document.querySelectorAll("button");
+anyButtonClicked.forEach((item) => 
+    item.addEventListener("click", () => {
+        if (outputDisplay.textContent.includes(".")){
+            decimalSelected.disabled = true;
+        } else {
+            decimalSelected.disabled = false;
+        }
+    })
+);
 
 const selectedOperator = document.querySelectorAll(".operator");
 selectedOperator.forEach((item) => {
@@ -49,7 +72,7 @@ selectedOperator.forEach((item) => {
     })}
 );
 
-const clearInputs = document.querySelector(".clear");
+const clearInputs = document.querySelector("#clear");
 clearInputs.addEventListener("click", () => {
     outputDisplay.textContent=0;
     firstNumber=0;
@@ -58,8 +81,8 @@ clearInputs.addEventListener("click", () => {
 });
 
 function operate (num1, num2, operator) {
-    num1=parseInt(num1);
-    num2=parseInt(num2);
+    num1=parseFloat(num1);
+    num2=parseFloat(num2);
     let operateOutput;
     switch (operator) {
         case "add":
@@ -75,7 +98,7 @@ function operate (num1, num2, operator) {
             operateOutput = divide(num1, num2);
             break;
     }
-    return operateOutput.toPrecision(2);
+    return operateOutput;
 };
 
 const executeOperation = document.querySelector(".equals");

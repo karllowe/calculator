@@ -75,7 +75,7 @@ function operate (num1, num2, operator) {
             operateOutput = divide(num1, num2);
             break;
     }
-    return operateOutput;
+    return operateOutput.toPrecision(2);
 };
 
 const executeOperation = document.querySelector(".equals");
